@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K.Praveen | Creative Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. VARIABLES & RESET --- */
+        :root {
+            --primary: #00ffcc;     /* Neon Green */
+            --secondary: #3399ff;   /* Neon Blue */
+            --bg-dark: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background: var(--bg-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- 2. 3D BACKGROUND CANVAS --- */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.1), rgba(5,5,5,0.95)); 
+        }
+
+        /* --- 3. LAYOUT & SECTIONS --- */
+        main {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 50px 0;
+        }
+
+        .align-left { justify-content: flex-start; }
+        .align-right { justify-content: flex-end; }
+        .align-center { justify-content: center; }
+
+        /* Glass Card Style */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* --- 4. TYPOGRAPHY --- */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- 5. BUTTONS --- */
+        .btn-container {
+            perspective: 1000px;
+            margin-top: 2rem;
+        }
+
+        .hire-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 5px;
+            transform-style: preserve-3d;
+            transform: rotateX(20deg) rotateY(10deg);
+            box-shadow: 6px 6px 0px var(--secondary), 10px 10px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hire-btn:hover {
+            transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+            background: white;
+            box-shadow: 0px 0px 20px var(--primary);
+        }
+
+        /* --- 6. FORM STYLES (NEW) --- */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(51, 153, 255, 0.2);
+        }
+
+        /* --- 7. SOCIAL ICONS --- */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+
+        .social-link {
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            transition: 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .social-link:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-tag {
+            padding: 8px 16px;
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+                justify-content: center !important;
+            }
+            .glass-card { padding: 2rem; margin: 0 1rem; text-align: center; }
+            .align-left, .align-right { justify-content: center; }
+            .skills-grid { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-container"></canvas>
+
+    <main>
+        <section class="align-left">
+            <div class="glass-card">
+                <h3>Portfolio</h3>
+                <h1>Hello, I am<br><span class="gradient-text">K. Praveen</span></h1>
+                <p style="font-size: 1.3rem; color: white;">Web Developer & Designer</p>
+                <div class="btn-container">
+                    <a href="#contact" class="hire-btn">HIRE ME</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="align-right">
+            <div class="glass-card">
+                <h2>About Me</h2>
+                <p>I am K. Praveen, a passionate technologist who bridges the gap between logic and art. With a background in Web Development, I build robust applications while ensuring every pixel looks perfect.</p>
+                <p><strong>Hobbies:</strong> Reading books, drawing arts.</p>
+            </div>
+        </section>
+
+        <section class="align-left">
+            <div class="glass-card">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <span class="skill-tag">HTML5 / CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Three.js</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">UI/UX Design</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="align-center" id="contact">
+            <div class="glass-card">
+                <h2>Get In Touch</h2>
+                <p>Send me a message for collaborations or just say hi!</p>
+                
+                <form class="contact-form" action="#" method="POST">
+                    <div class="input-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="input-group">
+                        <textarea placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="hire-btn" style="margin-top: 10px; width: 100%; transform: none;">SEND MESSAGE</button>
+                </form>
+
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/mr.praveen9608?igsh=MzJwMHJiNDF5eGYz" target="_blank" class="social-link">Instagram</a>
+                    <a href="https://github.com/MrPraveen9608" target="_blank" class="social-link">GitHub</a>
+                    <a href="https://youtube.com/@mr.praveen9608?si=ye-TGByw0uJ2MBWH" target="_blank" class="social-link">YouTube</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module">
+        import * as THREE from 'https://cdn.skypack.dev/three@0.128.0/build/three.module.js';
+
+        // Scene Setup
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x050505, 0.02); 
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector('#canvas-container'),
+            alpha: true,
+            antialias: true
+        });
+
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.setZ(30);
+
+        // 3D Objects
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+        const material = new THREE.MeshStandardMaterial({ color: 0x00ffcc, wireframe: true });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+
+        const icoGeo = new THREE.IcosahedronGeometry(2, 0);
+        const icoMat = new THREE.MeshStandardMaterial({ color: 0x3399ff });
+        const object1 = new THREE.Mesh(icoGeo, icoMat);
+        object1.position.set(10, -10, 10);
+        scene.add(object1);
+
+        // Stars
+        function addStar() {
+            const geometry = new THREE.SphereGeometry(0.2, 24, 24);
+            const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+            const star = new THREE.Mesh(geometry, material);
+            const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(150));
+            star.position.set(x, y, z);
+            scene.add(star);
+        }
+        Array(300).fill().forEach(addStar);
+
+        // Lighting
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(20, 20, 20);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(pointLight, ambientLight);
+
+        // Scroll Animation
+        function moveCamera() {
+            const t = document.body.getBoundingClientRect().top;
+            torusKnot.rotation.x += 0.05;
+            torusKnot.rotation.y += 0.075;
+            torusKnot.rotation.z += 0.05;
+            object1.rotation.y += 0.1;
+            camera.position.z = t * -0.01 + 30;
+            camera.position.x = t * -0.0002;
+        }
+        document.body.onscroll = moveCamera;
+
+        // Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            torusKnot.rotation.x += 0.002;
+            torusKnot.rotation.y += 0.002;
+            object1.rotation.x += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
