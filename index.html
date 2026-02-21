@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Korra Praveen | Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
             --primary: #6c63ff;
             --primary-glow: rgba(108, 99, 255, 0.6);
             --secondary: #ff6584;
+            --accent: #43e8c8;
             --dark: #0d0d1a;
             --darker: #07070f;
             --light: #f0f0ff;
             --text-gray: #a0a0c0;
             --card-bg: #13132a;
             --nav-bg: rgba(13, 13, 26, 0.92);
-            --glow-cyan: rgba(0, 255, 255, 0.5);
+            --glow-cyan: rgba(67, 232, 200, 0.5);
             --glow-purple: rgba(108, 99, 255, 0.5);
         }
 
@@ -24,7 +31,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -49,26 +56,41 @@
             justify-content: center;
             z-index: 9999;
             transition: opacity 0.6s ease, visibility 0.6s ease;
+            padding: 1rem;
         }
         #preloader.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
+        .preloader-icon {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            animation: spin-pulse 2s ease-in-out infinite;
+        }
+        @keyframes spin-pulse {
+            0%   { transform: rotate(0deg) scale(1); }
+            25%  { transform: rotate(90deg) scale(1.1); }
+            50%  { transform: rotate(180deg) scale(1); color: var(--secondary); }
+            75%  { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
         .preloader-text {
-            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-size: clamp(1.2rem, 4vw, 2.8rem);
             font-weight: 700;
             color: var(--primary);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             overflow: hidden;
             white-space: nowrap;
             border-right: 3px solid var(--primary);
             animation: typing var(--typing-duration, 2s) steps(40, end) forwards, blink 0.7s step-end infinite;
             width: 0;
+            max-width: 90vw;
         }
         @keyframes typing {
             from { width: 0; }
-            to   { width: var(--typing-width, 21ch); }
+            to   { width: var(--typing-width, 20ch); }
         }
         @keyframes blink {
             50% { border-color: transparent; }
@@ -76,7 +98,7 @@
         .preloader-dots {
             display: flex;
             gap: 0.6rem;
-            margin-top: 2rem;
+            margin-top: 1.8rem;
         }
         .preloader-dots span {
             width: 12px;
@@ -86,7 +108,7 @@
             animation: bounce 0.8s ease-in-out infinite;
         }
         .preloader-dots span:nth-child(2) { animation-delay: 0.15s; background: var(--secondary); }
-        .preloader-dots span:nth-child(3) { animation-delay: 0.3s; }
+        .preloader-dots span:nth-child(3) { animation-delay: 0.3s; background: var(--accent); }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); opacity: 0.4; }
             50%       { transform: translateY(-12px); opacity: 1; }
@@ -99,7 +121,7 @@
             left: 0;
             height: 3px;
             width: 0%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
             z-index: 2000;
             transition: width 0.1s linear;
             box-shadow: 0 0 8px var(--primary-glow);
@@ -127,11 +149,12 @@
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: 0.02em;
         }
 
         .nav-links { display: flex; gap: 2rem; }
@@ -140,19 +163,30 @@
             color: var(--text-gray);
             transition: color 0.3s;
             position: relative;
+            font-size: 0.95rem;
         }
         .nav-links a::after {
             content: '';
             position: absolute;
             bottom: -3px; left: 0;
             width: 0; height: 2px;
-            background: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             transition: width 0.3s ease;
         }
         .nav-links a:hover { color: var(--light); }
         .nav-links a:hover::after { width: 100%; }
 
-        .hamburger { display: none; cursor: pointer; font-size: 1.6rem; color: var(--light); background: none; border: none; }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.4rem;
+            color: var(--light);
+            background: none;
+            border: none;
+            padding: 0.3rem 0.5rem;
+            transition: color 0.3s;
+        }
+        .hamburger:hover { color: var(--primary); }
 
         /* ===================== HERO SECTION ===================== */
         .hero {
@@ -163,12 +197,48 @@
             align-items: center;
             text-align: center;
             padding: 6rem 5% 4rem;
-            background: radial-gradient(ellipse at 50% 40%, rgba(108,99,255,0.15) 0%, transparent 70%),
-                        radial-gradient(ellipse at 80% 80%, rgba(255,101,132,0.08) 0%, transparent 60%),
-                        var(--dark);
+            background: var(--dark);
             position: relative;
             overflow: hidden;
         }
+
+        /* Animated gradient orbs */
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            animation: orb-drift ease-in-out infinite;
+        }
+        .hero-orb-1 {
+            width: clamp(300px, 50vw, 600px);
+            height: clamp(300px, 50vw, 600px);
+            background: radial-gradient(circle, rgba(108,99,255,0.25), transparent 70%);
+            top: -10%; left: -10%;
+            animation-duration: 14s;
+        }
+        .hero-orb-2 {
+            width: clamp(200px, 35vw, 450px);
+            height: clamp(200px, 35vw, 450px);
+            background: radial-gradient(circle, rgba(255,101,132,0.2), transparent 70%);
+            bottom: -10%; right: -5%;
+            animation-duration: 18s;
+            animation-delay: -6s;
+        }
+        .hero-orb-3 {
+            width: clamp(150px, 25vw, 300px);
+            height: clamp(150px, 25vw, 300px);
+            background: radial-gradient(circle, rgba(67,232,200,0.15), transparent 70%);
+            top: 40%; left: 60%;
+            animation-duration: 11s;
+            animation-delay: -3s;
+        }
+        @keyframes orb-drift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33%       { transform: translate(30px, -20px) scale(1.05); }
+            66%       { transform: translate(-20px, 30px) scale(0.95); }
+        }
+
         .hero::before {
             content: '';
             position: absolute;
@@ -180,21 +250,28 @@
         .hero-content { position: relative; z-index: 1; }
 
         .hero-badge {
-            display: inline-block;
-            background: rgba(108,99,255,0.15);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(108,99,255,0.12);
             color: var(--primary);
             border: 1px solid rgba(108,99,255,0.3);
-            padding: 0.4rem 1rem;
+            padding: 0.4rem 1.1rem;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
             animation: fadeInDown 0.8s ease 0.3s both;
+        }
+        .hero-badge i { animation: pulse-icon 2s ease-in-out infinite; }
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50%       { transform: scale(1.2); }
         }
 
         .hero h1 {
-            font-size: clamp(2.2rem, 6vw, 4.5rem);
+            font-size: clamp(2rem, 6vw, 4.5rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1rem;
@@ -208,19 +285,53 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
             color: var(--text-gray);
             margin-bottom: 0.8rem;
             animation: fadeInUp 0.8s ease 0.65s both;
         }
+        .hero-subtitle .sep { color: var(--primary); opacity: 0.5; margin: 0 0.4rem; }
 
         .hero-location {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-gray);
             margin-bottom: 2.5rem;
             animation: fadeInUp 0.8s ease 0.75s both;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
         }
+        .hero-location i { color: var(--secondary); }
         .hero-location span { color: var(--secondary); }
+
+        .hero-socials {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+        .hero-socials a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(108,99,255,0.1);
+            border: 1px solid rgba(108,99,255,0.3);
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        .hero-socials a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108,99,255,0.4);
+        }
 
         .hero-btns {
             display: flex;
@@ -231,8 +342,10 @@
         }
 
         .btn {
-            display: inline-block;
-            padding: 0.85rem 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.95rem;
@@ -268,9 +381,9 @@
             position: absolute;
             border-radius: 50%;
             opacity: 0.3;
-            animation: float linear infinite;
+            animation: float-particle linear infinite;
         }
-        @keyframes float {
+        @keyframes float-particle {
             0%   { transform: translateY(100vh) scale(0); opacity: 0; }
             10%  { opacity: 0.3; }
             90%  { opacity: 0.3; }
@@ -332,6 +445,9 @@
         .delay-3 { transition-delay: 0.3s; }
         .delay-4 { transition-delay: 0.4s; }
         .delay-5 { transition-delay: 0.5s; }
+        .delay-6 { transition-delay: 0.6s; }
+        .delay-7 { transition-delay: 0.7s; }
+        .delay-8 { transition-delay: 0.8s; }
 
         /* ===================== ABOUT SECTION ===================== */
         #about { background: rgba(108,99,255,0.04); }
@@ -342,19 +458,26 @@
             gap: 3rem;
             align-items: center;
         }
+        .about-avatar-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
         .about-avatar {
             width: 100%;
-            max-width: 280px;
+            max-width: 240px;
             aspect-ratio: 1;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(4rem, 10vw, 6rem);
+            font-size: clamp(3.5rem, 9vw, 5.5rem);
             margin: 0 auto;
             box-shadow: 0 0 40px rgba(108,99,255,0.35), 0 0 80px rgba(108,99,255,0.15);
             animation: pulse-glow 3s ease-in-out infinite;
+            color: white;
         }
         @keyframes pulse-glow {
             0%, 100% { box-shadow: 0 0 40px rgba(108,99,255,0.35), 0 0 80px rgba(108,99,255,0.15); }
@@ -377,22 +500,27 @@
             margin-top: 1.5rem;
         }
         .detail-chip {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.45rem;
             background: rgba(108,99,255,0.1);
             border: 1px solid rgba(108,99,255,0.25);
             padding: 0.4rem 0.9rem;
             border-radius: 50px;
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             color: var(--light);
+            transition: background 0.3s, border-color 0.3s;
         }
+        .detail-chip:hover {
+            background: rgba(108,99,255,0.2);
+            border-color: var(--primary);
+        }
+        .detail-chip i { color: var(--primary); font-size: 0.85rem; }
 
         /* ===================== SKILLS SECTION ===================== */
         .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 1.2rem;
         }
 
@@ -417,19 +545,35 @@
         }
         .glow-hover:hover::before { opacity: 1; }
         .glow-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 18px var(--glow-purple), 0 0 40px rgba(108,99,255,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 0 22px var(--glow-purple), 0 0 50px rgba(108,99,255,0.15);
         }
 
-        .skill-tag {
+        .skill-card {
             background: var(--card-bg);
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            border: 1px solid rgba(108,99,255,0.2);
-            font-size: 0.95rem;
-            color: var(--light);
+            border-radius: 14px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: 1px solid rgba(108,99,255,0.18);
             cursor: default;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(108,99,255,0.25);
+            border-color: rgba(108,99,255,0.45);
+        }
+        .skill-icon {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+        .skill-card:hover .skill-icon { transform: scale(1.15) rotate(-5deg); }
+        .skill-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--light);
         }
 
         /* ===================== PROJECTS SECTION ===================== */
@@ -442,40 +586,86 @@
         }
         .project-card {
             background: var(--card-bg);
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(108,99,255,0.15);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(108,99,255,0.2);
         }
         .card-img {
             height: 180px;
-            background: linear-gradient(135deg, rgba(108,99,255,0.25), rgba(255,101,132,0.15));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: inherit;
+            filter: blur(20px);
+            opacity: 0.4;
+            z-index: 0;
+        }
+        .card-img i {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 0 12px currentColor);
+        }
+        .project-card:hover .card-img i { transform: scale(1.15) rotate(5deg); }
+        .card-img-1 {
+            background: linear-gradient(135deg, rgba(108,99,255,0.3), rgba(139,92,246,0.15));
+            color: #a78bfa;
+        }
+        .card-img-2 {
+            background: linear-gradient(135deg, rgba(67,232,200,0.25), rgba(108,99,255,0.15));
+            color: var(--accent);
+        }
+        .card-img-3 {
+            background: linear-gradient(135deg, rgba(255,101,132,0.25), rgba(255,165,0,0.15));
+            color: var(--secondary);
         }
         .card-content { padding: 1.5rem; }
-        .card-content h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .card-content h3 { margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700; }
         .card-content p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.7; }
         .tech-stack {
-            font-size: 0.78rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .tech-badge {
+            font-size: 0.72rem;
             color: var(--primary);
-            font-weight: 700;
-            letter-spacing: 0.04em;
+            font-weight: 600;
+            background: rgba(108,99,255,0.1);
+            border: 1px solid rgba(108,99,255,0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            letter-spacing: 0.03em;
         }
         .coming-soon-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             padding: 0.2rem 0.7rem;
             border-radius: 50px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
             letter-spacing: 0.05em;
         }
 
         /* ===================== CONTACT SECTION ===================== */
+        #contact { background: rgba(108,99,255,0.04); }
         .contact-wrapper {
             max-width: 640px;
             margin: 0 auto;
@@ -483,12 +673,21 @@
         .contact-form {
             background: var(--card-bg);
             padding: 2.5rem;
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid rgba(108,99,255,0.2);
             box-shadow: 0 8px 40px rgba(0,0,0,0.3);
         }
         .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-gray); font-size: 0.9rem; }
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        .form-group label i { color: var(--primary); font-size: 0.85rem; }
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -500,6 +699,7 @@
             color: var(--light);
             transition: border-color 0.3s, box-shadow 0.3s;
             outline: none;
+            font-family: inherit;
         }
         .form-group input:focus,
         .form-group textarea:focus {
@@ -513,9 +713,35 @@
             background: var(--darker);
             color: var(--text-gray);
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem 5%;
             border-top: 1px solid rgba(108,99,255,0.1);
             font-size: 0.9rem;
+        }
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(108,99,255,0.08);
+            border: 1px solid rgba(108,99,255,0.25);
+            color: var(--text-gray);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .footer-socials a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(108,99,255,0.4);
         }
         footer a { color: var(--primary); transition: color 0.2s; }
         footer a:hover { color: var(--secondary); }
@@ -534,11 +760,10 @@
         @media (max-width: 900px) {
             .about-grid { grid-template-columns: 1fr; text-align: center; }
             .about-details { justify-content: center; }
-            .about-avatar { max-width: 200px; }
+            .about-avatar { max-width: 190px; }
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.3rem; }
             section { padding: 5rem 5%; }
 
             .nav-links {
@@ -562,12 +787,22 @@
 
             .projects-grid { grid-template-columns: 1fr; }
             .hero-btns { flex-direction: column; align-items: center; }
+            .hero-btns .btn { width: 100%; max-width: 280px; justify-content: center; }
+
+            .skills-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
         }
 
         @media (max-width: 480px) {
-            .hero h1 { font-size: 1.9rem; }
             .section-title { font-size: 1.6rem; }
             .contact-form { padding: 1.5rem; }
+            .skills-grid { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+            .skill-card { padding: 1.1rem 0.6rem; }
+            .skill-icon { font-size: 2rem; }
+            .hero-socials a { width: 38px; height: 38px; font-size: 1rem; }
+        }
+
+        @media (max-width: 360px) {
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -578,6 +813,7 @@
 
     <!-- PRELOADER -->
     <div id="preloader">
+        <i class="fas fa-code preloader-icon"></i>
         <p class="preloader-text">Hello Praveen Here...</p>
         <div class="preloader-dots">
             <span></span><span></span><span></span>
@@ -587,27 +823,60 @@
     <!-- NAVIGATION -->
     <nav id="navbar">
         <div class="logo">KP.</div>
-        <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home"><i class="fas fa-house"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+            <li><a href="#projects"><i class="fas fa-folder-open"></i> Projects</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
     </nav>
 
     <!-- HERO -->
     <header id="home" class="hero">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
         <div class="particles" id="particles"></div>
         <div class="hero-content">
-            <div class="hero-badge">👨‍💻 Available for Opportunities</div>
+            <div class="hero-badge">
+                <i class="fas fa-circle-check"></i> Available for Opportunities
+            </div>
             <h1>Hi, I'm <span class="name-highlight">Korra Praveen</span></h1>
-            <p class="hero-subtitle">Java Enthusiast &nbsp;•&nbsp; Python Beginner &nbsp;•&nbsp; Video Editor &nbsp;•&nbsp; Data Analysis Learner</p>
-            <p class="hero-location">📍 Hayath Nagar, <span>Hyderabad, Telangana</span></p>
+            <p class="hero-subtitle">
+                <i class="fab fa-java" style="color:#f89820"></i> Java Enthusiast
+                <span class="sep">|</span>
+                <i class="fab fa-python" style="color:#3776ab"></i> Python Beginner
+                <span class="sep">|</span>
+                <i class="fas fa-film" style="color:var(--secondary)"></i> Video Editor
+                <span class="sep">|</span>
+                <i class="fas fa-chart-bar" style="color:var(--accent)"></i> Data Analysis Learner
+            </p>
+            <p class="hero-location">
+                <i class="fas fa-map-marker-alt"></i>
+                Hayath Nagar, <span>Hyderabad, Telangana</span>
+            </p>
+            <div class="hero-socials">
+                <a href="https://github.com/MrPraveen9608" target="_blank" rel="noopener" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/korra-praveen" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="mailto:praveenkorra9608@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
             <div class="hero-btns">
-                <a href="#projects" class="btn btn-primary">View My Projects</a>
-                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-folder-open"></i> View My Projects
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
             </div>
         </div>
     </header>
@@ -616,7 +885,11 @@
     <section id="about">
         <h2 class="section-title reveal"><span>About</span> Me</h2>
         <div class="about-grid">
-            <div class="about-avatar reveal-left delay-1">🧑‍💻</div>
+            <div class="about-avatar-wrap reveal-left delay-1">
+                <div class="about-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+            </div>
             <div class="about-text reveal-right delay-2">
                 <h3>Aspiring Java Developer</h3>
                 <p>
@@ -630,11 +903,11 @@
                     My dream is to become a Java programmer in a top MNC and build a Battle Field Game from scratch!
                 </p>
                 <div class="about-details">
-                    <span class="detail-chip">🎓 B.Tech IT</span>
-                    <span class="detail-chip">🏫 SDIES</span>
-                    <span class="detail-chip">📍 Hyderabad</span>
-                    <span class="detail-chip">☕ Java Enthusiast</span>
-                    <span class="detail-chip">🎮 Game Dev Dream</span>
+                    <span class="detail-chip"><i class="fas fa-graduation-cap"></i> B.Tech IT</span>
+                    <span class="detail-chip"><i class="fas fa-school"></i> SDIES</span>
+                    <span class="detail-chip"><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                    <span class="detail-chip"><i class="fab fa-java"></i> Java Enthusiast</span>
+                    <span class="detail-chip"><i class="fas fa-gamepad"></i> Game Dev Dream</span>
                 </div>
             </div>
         </div>
@@ -644,14 +917,38 @@
     <section id="skills">
         <h2 class="section-title reveal"><span>My</span> Skills</h2>
         <div class="skills-grid">
-            <span class="skill-tag glow-hover reveal delay-1">☕ Java</span>
-            <span class="skill-tag glow-hover reveal delay-2">🐍 Python</span>
-            <span class="skill-tag glow-hover reveal delay-3">🌐 HTML5</span>
-            <span class="skill-tag glow-hover reveal delay-4">🎨 CSS3</span>
-            <span class="skill-tag glow-hover reveal delay-5">📊 Data Analysis</span>
-            <span class="skill-tag glow-hover reveal delay-1">🎬 Video Editing</span>
-            <span class="skill-tag glow-hover reveal delay-2">🗄️ SQL (Basics)</span>
-            <span class="skill-tag glow-hover reveal delay-3">🔧 Git</span>
+            <div class="skill-card reveal delay-1">
+                <i class="fab fa-java skill-icon" style="color:#f89820"></i>
+                <span class="skill-name">Java</span>
+            </div>
+            <div class="skill-card reveal delay-2">
+                <i class="fab fa-python skill-icon" style="color:#3776ab"></i>
+                <span class="skill-name">Python</span>
+            </div>
+            <div class="skill-card reveal delay-3">
+                <i class="fab fa-html5 skill-icon" style="color:#e34f26"></i>
+                <span class="skill-name">HTML5</span>
+            </div>
+            <div class="skill-card reveal delay-4">
+                <i class="fab fa-css3-alt skill-icon" style="color:#1572b6"></i>
+                <span class="skill-name">CSS3</span>
+            </div>
+            <div class="skill-card reveal delay-5">
+                <i class="fas fa-chart-bar skill-icon" style="color:var(--accent)"></i>
+                <span class="skill-name">Data Analysis</span>
+            </div>
+            <div class="skill-card reveal delay-6">
+                <i class="fas fa-film skill-icon" style="color:var(--secondary)"></i>
+                <span class="skill-name">Video Editing</span>
+            </div>
+            <div class="skill-card reveal delay-7">
+                <i class="fas fa-database skill-icon" style="color:#f7931e"></i>
+                <span class="skill-name">SQL (Basics)</span>
+            </div>
+            <div class="skill-card reveal delay-8">
+                <i class="fab fa-git-alt skill-icon" style="color:#f05032"></i>
+                <span class="skill-name">Git</span>
+            </div>
         </div>
     </section>
 
@@ -659,31 +956,50 @@
     <section id="projects">
         <h2 class="section-title reveal"><span>My</span> Projects</h2>
         <div class="projects-grid">
-            <div class="project-card glow-hover reveal delay-1">
-                <div class="card-img">🎮</div>
+            <div class="project-card reveal delay-1">
+                <div class="card-img card-img-1">
+                    <i class="fas fa-gamepad"></i>
+                </div>
                 <div class="card-content">
-                    <span class="coming-soon-badge">Coming Soon</span>
+                    <span class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</span>
                     <h3>Battle Field Game</h3>
                     <p>An action-packed battle field game built from scratch using Java. A dream project in progress — stay tuned!</p>
-                    <span class="tech-stack">Java • Game Dev • Logic Building</span>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Java</span>
+                        <span class="tech-badge">Game Dev</span>
+                        <span class="tech-badge">Logic Building</span>
+                    </div>
                 </div>
             </div>
-            <div class="project-card glow-hover reveal delay-2">
-                <div class="card-img">📊</div>
+            <div class="project-card reveal delay-2">
+                <div class="card-img card-img-2">
+                    <i class="fas fa-chart-line"></i>
+                </div>
                 <div class="card-content">
-                    <span class="coming-soon-badge">Coming Soon</span>
+                    <span class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</span>
                     <h3>Data Analysis Dashboard</h3>
                     <p>A beginner-level data analysis project exploring datasets and visualizing insights with Python.</p>
-                    <span class="tech-stack">Python • Data Analysis • Visualization</span>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Data Analysis</span>
+                        <span class="tech-badge">Visualization</span>
+                    </div>
                 </div>
             </div>
-            <div class="project-card glow-hover reveal delay-3">
-                <div class="card-img">🌐</div>
+            <div class="project-card reveal delay-3">
+                <div class="card-img card-img-3">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
                 <div class="card-content">
-                    <span class="coming-soon-badge">Coming Soon</span>
+                    <span class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</span>
                     <h3>Personal Portfolio</h3>
-                    <p>This very portfolio — built with pure HTML, CSS & JavaScript featuring animations, preloader, and scroll effects.</p>
-                    <span class="tech-stack">HTML • CSS • JavaScript • Animations</span>
+                    <p>This very portfolio — built with pure HTML, CSS &amp; JavaScript featuring animations, preloader, and scroll effects.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Animations</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -696,18 +1012,20 @@
             <div class="contact-form glow-hover reveal delay-1">
                 <form onsubmit="handleForm(event)">
                     <div class="form-group">
-                        <label>Name</label>
+                        <label><i class="fas fa-user"></i> Name</label>
                         <input type="text" required placeholder="Your Name">
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
+                        <label><i class="fas fa-envelope"></i> Email</label>
                         <input type="email" required placeholder="your.email@example.com">
                     </div>
                     <div class="form-group">
-                        <label>Message</label>
+                        <label><i class="fas fa-comment-dots"></i> Message</label>
                         <textarea required placeholder="Say hello or ask anything..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;">Send Message 🚀</button>
+                    <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
                 </form>
             </div>
         </div>
@@ -715,20 +1033,34 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2024 <a href="#home">Korra Praveen</a> — Built with ❤️ using HTML, CSS & JavaScript</p>
-        <p style="margin-top:0.4rem; font-size:0.8rem;">IT Department • Sree Dattha Institute of Engineering and Science • Hyderabad</p>
+        <div class="footer-socials">
+            <a href="https://github.com/MrPraveen9608" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/korra-praveen" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:praveenkorra9608@gmail.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p>© 2024 <a href="#home">Korra Praveen</a> — Built with <i class="fas fa-heart" style="color:var(--secondary)"></i> using HTML, CSS &amp; JavaScript</p>
+        <p style="margin-top:0.4rem; font-size:0.8rem;">
+            <i class="fas fa-building" style="color:var(--primary); margin-right:0.3rem"></i>IT Department • Sree Dattha Institute of Engineering and Science • Hyderabad
+        </p>
     </footer>
 
     <script>
         /* ===================== PRELOADER ===================== */
         const TYPING_DURATION_MS = 2000;
-        const PRELOADER_EXIT_DELAY_MS = TYPING_DURATION_MS + 800; // typing + fade buffer
+        const PRELOADER_EXIT_DELAY_MS = TYPING_DURATION_MS + 800;
 
         window.addEventListener('load', () => {
-            /* Set exact character width so typing animation fits the text */
             const preloaderText = document.querySelector('.preloader-text');
             if (preloaderText) {
-                preloaderText.style.setProperty('--typing-width', preloaderText.textContent.length + 'ch');
+                const charCount = preloaderText.textContent.length;
+                /* 88vw keeps a 2vw buffer below the 90vw max-width in CSS, preventing overflow on mobile */
+                preloaderText.style.setProperty('--typing-width', `min(${charCount}ch, 88vw)`);
                 preloaderText.style.setProperty('--typing-duration', (TYPING_DURATION_MS / 1000) + 's');
             }
             setTimeout(() => {
@@ -743,7 +1075,6 @@
             const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
             document.getElementById('scroll-progress').style.width = pct + '%';
 
-            /* Nav shadow on scroll */
             document.getElementById('navbar').classList.toggle('scrolled', scrollTop > 30);
         });
 
@@ -754,7 +1085,9 @@
                     entry.target.classList.add('revealed');
                 }
             });
-        }, { threshold: 0.15 });
+        /* threshold: 0.12 triggers reveal slightly earlier than default,
+           giving smoother transitions for card-heavy sections on mobile */
+        }, { threshold: 0.12 });
 
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
             revealObserver.observe(el);
@@ -764,17 +1097,19 @@
         (function spawnParticles() {
             const container = document.getElementById('particles');
             if (!container) return;
-            const colors = ['#6c63ff', '#ff6584', '#43e8c8', '#ffd700'];
-            for (let i = 0; i < 18; i++) {
+            const colors = ['#6c63ff', '#ff6584', '#43e8c8', '#ffd700', '#8b5cf6'];
+            for (let i = 0; i < 22; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
-                const size = Math.random() * 6 + 3;
+                const size = Math.random() * 5 + 2;
                 p.style.cssText = `
                     width:${size}px; height:${size}px;
                     left:${Math.random() * 100}%;
                     background:${colors[Math.floor(Math.random() * colors.length)]};
-                    animation-duration:${Math.random() * 12 + 8}s;
+                    animation-name:float-particle;
+                    animation-duration:${Math.random() * 14 + 8}s;
                     animation-delay:${Math.random() * 8}s;
+                    box-shadow:0 0 ${size * 2}px currentColor;
                 `;
                 container.appendChild(p);
             }
@@ -782,11 +1117,20 @@
 
         /* ===================== MOBILE MENU ===================== */
         function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+            const navLinks = document.getElementById('navLinks');
+            const icon = document.querySelector('.hamburger i');
+            navLinks.classList.toggle('active');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-xmark');
+            } else {
+                icon.classList.replace('fa-xmark', 'fa-bars');
+            }
         }
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('navLinks').classList.remove('active');
+                const icon = document.querySelector('.hamburger i');
+                icon.classList.replace('fa-xmark', 'fa-bars');
             });
         });
 
@@ -794,10 +1138,10 @@
         function handleForm(event) {
             event.preventDefault();
             const btn = event.target.querySelector('button[type="submit"]');
-            btn.textContent = '✅ Message Sent!';
+            btn.innerHTML = '<i class="fas fa-check-circle"></i> Message Sent!';
             btn.disabled = true;
             setTimeout(() => {
-                btn.textContent = 'Send Message 🚀';
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
                 btn.disabled = false;
                 event.target.reset();
             }, 3000);
