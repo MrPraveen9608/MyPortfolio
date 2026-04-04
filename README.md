@@ -2,6 +2,8 @@
 
 > A single-page 3D immersive portfolio built entirely with vanilla HTML, CSS and JavaScript — no frameworks, no build tools, just clean code.
 
+🌐 **Live Site → [https://mrpraveen9608.github.io/MyPortfolio/](https://mrpraveen9608.github.io/MyPortfolio/)**
+
 ---
 
 ## 🧑‍💻 Who
@@ -19,10 +21,10 @@ A fully responsive personal portfolio website featuring:
 
 | Section | Status | Description |
 |---------|--------|-------------|
-| **Hero** | ✅ Live | Animated intro with 3D floating profile card and orbiting rings |
+| **Hero** | ✅ Live | Animated intro with 3D floating profile card, orbiting rings & resume button |
 | **About Me** | ✅ Live | Bio, info cards, animated skill bars, hobby highlight |
 | **Projects** | 🔜 Coming Soon | Countdown timer + dev progress bar |
-| **Resume** | 🔜 Coming Soon | Notify-me email form |
+| **Resume** | ✅ Live | 3D shining button · inline PDF viewer (desktop) · download-only (mobile) |
 | **Contact** | ✅ Live | GitHub & email links |
 
 ---
@@ -36,13 +38,15 @@ A fully responsive personal portfolio website featuring:
 - **3D floating cards** — hero profile card and about-me card animate with CSS `perspective` + `rotateX/rotateY`; they tilt in real-time toward the mouse cursor
 - **CSS `transform-style: preserve-3d`** — hero and profile cards maintain true 3D space
 - **Orbiting rings** — two dashed rings orbit the hero card on independent timers
+- **3D Resume button** — gradient colour shift, shine-sweep animation, dual-layer glow pulse, depth shadow and satisfying `:active` press effect
 
 ### UI & Interaction
 - **Custom CSS cursor** — dot + lagged ring follower, scales on hover
 - **Smooth scroll reveal** — `IntersectionObserver` fades & slides sections in as they enter the viewport
 - **Animated skill bars** — fill from 0 to percentage when the about section scrolls into view
 - **Live countdown timer** — ticks down to project launch (90 days from first load)
-- **Notify-me form** — captures interest for the upcoming resume drop
+- **Inline resume PDF viewer** — desktop users see the resume embedded in-page via Google Docs Viewer; no download required
+- **Mobile-optimised resume** — phones show only the one-tap download button (no oversized iframe)
 - **Scroll-to-top button** — appears after 300 px of scroll
 - **Sticky frosted-glass nav** — blurs + darkens on scroll; mobile hamburger menu
 
@@ -56,6 +60,17 @@ A fully responsive personal portfolio website featuring:
 | Fonts | Google Fonts — Orbitron, Inter, JetBrains Mono |
 | Icons | Unicode / Emoji (no external icon library dependency) |
 | Scroll effects | `IntersectionObserver` + `requestAnimationFrame` |
+| PDF viewer | Google Docs Viewer (iframe, desktop only) |
+
+---
+
+## 📍 Where
+
+**Deployed** on GitHub Pages:  
+🌐 **[https://mrpraveen9608.github.io/MyPortfolio/](https://mrpraveen9608.github.io/MyPortfolio/)**
+
+Developed from:  
+📍 Hayathnagar, Hyderabad, Telangana, India
 
 ---
 
@@ -65,8 +80,19 @@ A fully responsive personal portfolio website featuring:
 |-----------|------|
 | Initial portfolio created | Early 2025 |
 | Full rebuild with 3D effects | March 2025 |
+| Resume button + PDF viewer added | April 2025 |
 | Projects section launch | TBD (~90 days) |
-| Resume upload | TBD |
+
+---
+
+## ❓ Why
+
+I built this portfolio to:
+
+1. **Showcase my journey** — as a BTech 2nd year CS student actively learning Java, C++ and Machine Learning
+2. **Practice front-end skills** — pushing vanilla HTML/CSS/JS to its limits with 3D transforms, canvas and `IntersectionObserver`
+3. **Stand out** — a static-file portfolio that looks and feels like a modern SPA, without a single npm dependency
+4. **Share my resume** — with a desktop PDF viewer and a one-tap mobile download button, so every visitor can access it the most convenient way
 
 ---
 
@@ -82,6 +108,9 @@ python3 -m http.server 8080
 # then visit http://localhost:8080
 ```
 
+Or visit the **live site** instantly:  
+🌐 [https://mrpraveen9608.github.io/MyPortfolio/](https://mrpraveen9608.github.io/MyPortfolio/)
+
 ---
 
 ## 📁 File Structure
@@ -96,8 +125,10 @@ MyPortfolio/
 
 ## 🔮 Roadmap
 
+- [x] Hero section — 3D floating card, orbiting rings, starfield, resume button
+- [x] About section — skills bars, stat cards, hobby card
+- [x] Resume — 3D shining button, inline PDF viewer (desktop), mobile download
 - [ ] Projects section — Java, C++ & ML showcase
-- [ ] Resume PDF upload
 - [ ] Dark/Light mode toggle
 - [ ] Contact form backend (email forwarding)
 - [ ] Blog / devlog section
@@ -106,4 +137,7 @@ MyPortfolio/
 
 ## 📜 License
 
-© 2025 K. Praveen · All rights reserved · Hayathnagar, Hyderabad
+© 2025 **K. Praveen** · All rights reserved  
+Hayathnagar, Hyderabad, Telangana, India  
+No part of this portfolio may be reproduced or distributed without prior written permission.
+
