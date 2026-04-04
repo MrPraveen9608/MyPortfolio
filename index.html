@@ -1209,7 +1209,7 @@
                 onclick="openPdfModal('./Coursera%204Y7LN4V6AT3M.pdf','Coursera Certificate I','Coursera_4Y7LN4V6AT3M.pdf')">
           👁 View
         </button>
-        <a href="./Coursera 4Y7LN4V6AT3M.pdf" download="Coursera_4Y7LN4V6AT3M.pdf" class="btn btn-outline">
+        <a href="./Coursera%204Y7LN4V6AT3M.pdf" download="Coursera_4Y7LN4V6AT3M.pdf" class="btn btn-outline">
           📥 Save
         </a>
       </div>
@@ -1227,7 +1227,7 @@
                 onclick="openPdfModal('./Coursera%2064W0THDFWP7W.pdf','Coursera Certificate II','Coursera_64W0THDFWP7W.pdf')">
           👁 View
         </button>
-        <a href="./Coursera 64W0THDFWP7W.pdf" download="Coursera_64W0THDFWP7W.pdf" class="btn btn-outline">
+        <a href="./Coursera%2064W0THDFWP7W.pdf" download="Coursera_64W0THDFWP7W.pdf" class="btn btn-outline">
           📥 Save
         </a>
       </div>
@@ -1527,8 +1527,10 @@ tilt3D('heroCardWrap','heroCard3d',22);
   const closeBtn = $('pdfModalCloseBtn');
 
   function buildViewerUrl(pdfSrc){
-    // Resolve relative paths to absolute so Google Docs Viewer can fetch them
+    // Resolve relative paths to absolute so Google Docs Viewer can fetch them.
+    // Falls back to the direct PDF URL for local / file:// environments.
     const abs = new URL(pdfSrc, window.location.href).href;
+    if(abs.startsWith('file://')) return abs;
     return 'https://docs.google.com/viewer?url=' + encodeURIComponent(abs) + '&embedded=true';
   }
 
@@ -1564,11 +1566,25 @@ tilt3D('heroCardWrap','heroCard3d',22);
   const frame   = $('resumeViewerFrame');
   const loading = $('resumeViewerLoading');
   if(!frame) return;
-  // Only load on desktop (viewport >= 769px) to avoid useless iframe on mobile
-  if(window.innerWidth < 769) return;
+
   const pdfPath = './RESUME.PRAVEEN.pdf';
   const abs     = new URL(pdfPath, window.location.href).href;
-  frame.src     = 'https://docs.google.com/viewer?url=' + encodeURIComponent(abs) + '&embedded=true';
+  const gdocsUrl = abs.startsWith('file://')
+    ? abs  // local — serve directly
+    : 'https://docs.google.com/viewer?url=' + encodeURIComponent(abs) + '&embedded=true';
+
+  function loadViewer(){
+    frame.src = gdocsUrl;
+  }
+
+  // Respect the CSS media query: only load when the wrap is visible (≥769 px)
+  const mq = window.matchMedia('(min-width: 769px)');
+  if(mq.matches) loadViewer();
+  mq.addEventListener('change', e => {
+    if(e.matches && !frame.src){ loadViewer(); }
+    else if(!e.matches){ frame.src = ''; }
+  });
+
   frame.addEventListener('load', ()=>{
     if(loading) loading.style.display = 'none';
     frame.style.opacity = '1';
