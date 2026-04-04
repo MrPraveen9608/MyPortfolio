@@ -678,7 +678,7 @@
       display:flex; gap:1rem; flex-wrap:wrap;
       justify-content:center; align-items:center;
     }
-    /* PDF viewer – desktop only */
+    /* PDF viewer */
     .resume-viewer-wrap {
       width:100%;
       display:flex; flex-direction:column; align-items:center; gap:.8rem;
@@ -696,8 +696,7 @@
     }
     .resume-viewer-note a { color:var(--accent); text-decoration:underline; }
     @media(max-width:768px){
-      .resume-viewer-wrap    { display:none; }
-      .resume-open-tab-btn   { display:none; }
+      .resume-viewer-frame { height:480px; }
     }
 
     /* ══════════════════════════════════════
@@ -845,7 +844,7 @@
       <div class="hero-btns reveal delay-4">
         <a href="#about"    class="btn btn-primary">🚀 About Me</a>
         <a href="#projects" class="btn btn-outline">💡 Projects</a>
-        <a href="https://pdf.ac/gc4qmYmv" download="K_Praveen_Resume.pdf" class="btn-resume-3d btn-resume-hero">📄 Resume</a>
+        <a href="./RESUME.PRAVEEN.pdf" download="K_Praveen_Resume.pdf" class="btn-resume-3d btn-resume-hero">📄 Resume</a>
       </div>
       <div class="hero-tags reveal delay-4">
         <span class="tag">Java</span>
@@ -1055,23 +1054,23 @@
   <div class="resume-live">
     <!-- Button row (visible on all devices) -->
     <div class="resume-btn-row reveal delay-2">
-      <a href="https://pdf.ac/gc4qmYmv"
+      <a href="./RESUME.PRAVEEN.pdf"
          download="K_Praveen_Resume.pdf"
          class="btn-resume-3d">
         📥 Download Resume
       </a>
-      <a href="https://pdf.ac/gc4qmYmv"
+      <a href="./RESUME.PRAVEEN.pdf"
          target="_blank" rel="noopener noreferrer"
          class="btn btn-outline resume-open-tab-btn">
         👁️ Open in New Tab
       </a>
     </div>
 
-    <!-- PDF inline viewer — desktop only, hidden on mobile -->
+    <!-- PDF inline viewer — desktop & mobile -->
     <div class="resume-viewer-wrap reveal delay-3">
       <div class="resume-viewer-frame">
         <iframe
-          src="https://docs.google.com/viewer?url=https%3A%2F%2Fpdf.ac%2Fgc4qmYmv&embedded=true"
+          src="./RESUME.PRAVEEN.pdf"
           class="pdf-iframe"
           title="K. Praveen — Resume"
           allowfullscreen
@@ -1079,7 +1078,7 @@
       </div>
       <p class="resume-viewer-note">
         Can't see the preview?
-        <a href="https://pdf.ac/gc4qmYmv" target="_blank" rel="noopener noreferrer">Open directly ↗</a>
+        <a href="./RESUME.PRAVEEN.pdf" target="_blank" rel="noopener noreferrer">Open directly ↗</a>
       </p>
     </div>
   </div>
