@@ -95,7 +95,7 @@ const floatCardStyle = i => ({
   background:'rgba(108,99,255,.08)',
   border:'1px solid rgba(108,99,255,.2)',
   animation:`float-card-anim 10s ease-in-out infinite`,
-  animationDelay: [-0,'-3s','-1.5s','-5s'][i],
+  animationDelay: ['0s','-3s','-1.5s','-5s'][i],
   ...[
     { top:'10%', left:'5%' },
     { top:'60%', left:'8%' },

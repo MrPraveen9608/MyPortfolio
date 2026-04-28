@@ -62,7 +62,7 @@ export default function About() {
               <div style={{ fontSize:'.78rem', color:'var(--accent)', textAlign:'center', position:'relative', zIndex:1 }}>Sree Datta College</div>
             </div>
           </div>
-          <div style={statGridStyle}>
+          <div className="stat-grid" style={statGridStyle}>
             {[['2nd','BTech Year'],['CSIT','B Section'],['HYD','Hyderabad'],['∞','Curiosity']].map(([n,l],i) => (
               <div key={l} className={`stat-card reveal delay-${i+1}`} style={statCardStyle}>
                 <div style={statNumStyle}>{n}</div>

@@ -63,6 +63,4 @@ const linkItemStyle = {
   position:'relative', padding:'4px 0',
   transition:'color var(--transition)',
 }
-const toggleStyle = {
-  display:'none', background:'none', border:'none', cursor:'pointer',
-}
+const toggleStyle = {}
