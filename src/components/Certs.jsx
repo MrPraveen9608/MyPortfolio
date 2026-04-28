@@ -1,4 +1,5 @@
 import { useRevealOnMount } from '../hooks/useScrollReveal'
+import { buildPublicAssetPath } from '../utils/publicAsset'
 
 const certs = [
   {
@@ -40,12 +41,12 @@ export default function Certs({ openModal }) {
             <div style={{ display:'flex', gap:'.8rem', flexWrap:'wrap', marginTop:'.4rem' }}>
               <button
                 className="btn btn-primary"
-                onClick={() => openModal(`/MyPortfolio/${encodeURIComponent(c.file)}`, c.name, c.dlName)}
+                onClick={() => openModal(buildPublicAssetPath(c.file), c.name, c.dlName)}
               >
                 👁 View
               </button>
               <a
-                href={`/MyPortfolio/${encodeURIComponent(c.file)}`}
+                href={buildPublicAssetPath(c.file)}
                 download={c.dlName}
                 className="btn btn-outline"
               >

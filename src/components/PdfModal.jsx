@@ -20,7 +20,7 @@ export default function PdfModal({ open, src, title, dlName, onClose }) {
 
   const viewerUrl = src
     ? `https://docs.google.com/viewer?url=${encodeURIComponent(
-        `https://mrpraveen9608.github.io${src}`
+        `${window.location.origin}${src}`
       )}&embedded=true`
     : ''
 

@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { useRevealOnMount } from '../hooks/useScrollReveal'
+import { buildPublicAssetPath } from '../utils/publicAsset'
 
 export default function Hero({ openModal }) {
   useRevealOnMount()
@@ -51,7 +52,7 @@ export default function Hero({ openModal }) {
             <a href="#projects" className="btn btn-outline">💡 Projects</a>
             <button
               className="btn-resume-3d btn-resume-hero"
-              onClick={() => openModal('/MyPortfolio/RESUME.PRAVEEN.pdf','K. Praveen — Resume','K_Praveen_Resume.pdf')}
+              onClick={() => openModal(buildPublicAssetPath('RESUME.PRAVEEN.pdf'),'K. Praveen — Resume','K_Praveen_Resume.pdf')}
             >📄 Resume</button>
           </div>
           <div className="hero-tags reveal delay-4" style={tagsStyle}>

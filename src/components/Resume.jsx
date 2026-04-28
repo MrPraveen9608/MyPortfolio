@@ -1,4 +1,5 @@
 import { useRevealOnMount } from '../hooks/useScrollReveal'
+import { buildAbsoluteAssetUrl, buildPublicAssetPath } from '../utils/publicAsset'
 
 export default function Resume({ openModal }) {
   useRevealOnMount()
@@ -16,7 +17,7 @@ export default function Resume({ openModal }) {
       <div style={liveStyle}>
         <div className="reveal delay-2" style={{ display:'flex', gap:'1rem', flexWrap:'wrap', justifyContent:'center', alignItems:'center' }}>
           <a
-            href="/MyPortfolio/RESUME.PRAVEEN.pdf"
+            href={buildPublicAssetPath('RESUME.PRAVEEN.pdf')}
             download="K_Praveen_Resume.pdf"
             className="btn-resume-3d"
           >
@@ -25,7 +26,7 @@ export default function Resume({ openModal }) {
           <button
             className="btn-resume-3d"
             style={{ padding:'1.1rem 2.2rem', fontSize:'.9rem' }}
-            onClick={() => openModal('/MyPortfolio/RESUME.PRAVEEN.pdf','K. Praveen — Resume','K_Praveen_Resume.pdf')}
+            onClick={() => openModal(buildPublicAssetPath('RESUME.PRAVEEN.pdf'),'K. Praveen — Resume','K_Praveen_Resume.pdf')}
           >
             👁 View Resume
           </button>
@@ -35,16 +36,16 @@ export default function Resume({ openModal }) {
         <div className="resume-viewer-wrap reveal delay-3" style={viewerWrapStyle}>
           <div style={viewerFrameStyle}>
             <iframe
-              src={`https://docs.google.com/viewer?url=${encodeURIComponent('https://mrpraveen9608.github.io/MyPortfolio/RESUME.PRAVEEN.pdf')}&embedded=true`}
+              src={`https://docs.google.com/viewer?url=${encodeURIComponent(buildAbsoluteAssetUrl('RESUME.PRAVEEN.pdf'))}&embedded=true`}
               title="K. Praveen — Resume"
               style={{ width:'100%', height:'100%', border:'none', display:'block' }}
             />
           </div>
           <p style={{ fontSize:'.82rem', color:'var(--muted)' }}>
             Not loading?{' '}
-            <a href="/MyPortfolio/RESUME.PRAVEEN.pdf" target="_blank" rel="noopener" style={{ color:'var(--accent)', textDecoration:'underline' }}>Open in new tab</a>
+            <a href={buildPublicAssetPath('RESUME.PRAVEEN.pdf')} target="_blank" rel="noopener" style={{ color:'var(--accent)', textDecoration:'underline' }}>Open in new tab</a>
             {' '}or{' '}
-            <a href="/MyPortfolio/RESUME.PRAVEEN.pdf" download="K_Praveen_Resume.pdf" style={{ color:'var(--accent)', textDecoration:'underline' }}>Download directly</a>.
+            <a href={buildPublicAssetPath('RESUME.PRAVEEN.pdf')} download="K_Praveen_Resume.pdf" style={{ color:'var(--accent)', textDecoration:'underline' }}>Download directly</a>.
           </p>
         </div>
       </div>
