@@ -296,6 +296,19 @@ section {
 }
 
 /* ══════════════════════════════════════
+   NAV TOGGLE (HAMBURGER)
+══════════════════════════════════════ */
+.nav-toggle {
+  display:none; background:none; border:none; cursor:pointer;
+  flex-direction:column; gap:5px; padding:4px;
+}
+.nav-toggle span {
+  display:block; width:24px; height:2px;
+  background:var(--text); border-radius:2px;
+  transition:all var(--transition);
+}
+
+/* ══════════════════════════════════════
    MOBILE
 ══════════════════════════════════════ */
 @media(max-width:900px){
@@ -309,7 +322,8 @@ section {
 @media(max-width:600px){
   .nav-links { display:none !important; flex-direction:column; position:fixed; inset:0; top:var(--nav-h); background:rgba(5,5,15,0.97); align-items:center; justify-content:center; gap:2rem; padding:2rem; z-index:99; }
   .nav-links.open { display:flex !important; }
-  .nav-toggle { display:flex !important; flex-direction:column; }
+  .nav-toggle { display:flex !important; }
   .hero-card-3d { width:260px !important; height:320px !important; }
   .stat-grid { width:100% !important; }
+  .resume-viewer-wrap { display:none !important; }
 }
