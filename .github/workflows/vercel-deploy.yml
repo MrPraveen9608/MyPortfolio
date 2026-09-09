@@ -30,10 +30,20 @@ jobs:
         run: npm install --global vercel@latest
 
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=${{ github.event_name == 'pull_request' && 'preview' || 'production' }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          fi
 
       - name: Build Project Artifacts
-        run: vercel build ${{ github.event_name == 'pull_request' && '' || '--prod' }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          fi
 
       - name: Deploy to Vercel
         id: deploy
