@@ -1,27 +1,20 @@
-# K. Praveen Portfolio
+# K. Praveen Portfolio (Next.js)
 
-Modern personal portfolio built with React + Vite.
-
-Live site: https://mrpraveen9608.github.io/MyPortfolio/
+Redesigned personal portfolio built with Next.js and deployed on Vercel.
 
 ## Tech Stack
 
+- Next.js 14
 - React 18
-- Vite 5
 - Vanilla CSS
-
-## Project Structure
-
-- src/components: UI sections and reusable components
-- src/hooks: custom hooks for reveal and countdown logic
-- src/utils: shared utility helpers
-- public: static files (resume and certificates)
+- GitHub Actions (auto deployment)
+- Vercel
 
 ## Local Development
 
 Requirements:
 
-- Node.js 18+
+- Node.js 20+
 - npm 9+
 
 Commands:
@@ -31,22 +24,50 @@ npm install
 npm run dev
 ```
 
-Build and preview:
+Production build:
 
 ```bash
 npm run build
-npm run preview
+npm run start
 ```
 
-## Deployment
+## Automatic Vercel Deployment via GitHub Actions
 
-This repo is configured for GitHub Pages.
+This repository includes `.github/workflows/vercel-deploy.yml` that:
+
+- deploys **preview** environments for pull requests
+- deploys **production** on push to `main`
+
+### 1) Create and link Vercel project
+
+1. Login to Vercel and import this GitHub repository.
+2. Run this once locally in the repo root:
 
 ```bash
-npm run deploy
+npx vercel link
 ```
 
-Notes:
+This links the project and gives you the values needed for workflow secrets.
 
-- Vite base path is set to /MyPortfolio/ in vite.config.js
-- Asset links use import.meta.env.BASE_URL to work in local dev and production
+### 2) Add required GitHub repository secrets
+
+Go to: `GitHub Repo -> Settings -> Secrets and variables -> Actions`
+
+Add these secrets:
+
+- `VERCEL_TOKEN` (from Vercel account settings)
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+> `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` can be copied from `.vercel/project.json` after `vercel link`.
+
+### 3) Push to trigger deployment
+
+- Open a PR to get a preview deployment.
+- Merge/push to `main` for production deployment.
+
+The workflow automatically posts preview URLs in pull request comments.
+
+## Static Assets
+
+Resume and certificate PDFs are served from `/public`.
